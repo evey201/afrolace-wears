@@ -16,7 +16,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
                 hidden: !state.hidden
             };
         case CartActionTypes.Add_Item:
-            console.log('dskd');
+            
             return {
                 ...state,
                 

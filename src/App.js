@@ -12,8 +12,10 @@ import CheckoutPage from './pages/checkout/checkout.component';
 
 import Header from './components/header/header.component';
 import { auth, createUserProfileDocument  } from './firebase/firebase.utils';
+
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selector'
+// import { selectCollectionsForPreview } from './redux/shop/shop.selector'
 
 class App extends React.Component {
 
@@ -37,6 +39,12 @@ class App extends React.Component {
           });
       } 
         setCurrentUser(userAuth);
+        //  Used the code below to add collections to the database: collectionsArray was destructured off the props
+        // addCollectionAndDocuments was gotten from the firebase.utils.js file
+
+        // addCollectionAndDocuments('collections',collectionsArray.map(
+        //   ({title, items}) => ({ title, items }))
+        // );
     });
   }
 
@@ -64,6 +72,8 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  // Used the code below to add files to the database
+  // collectionsArray: selectCollectionsForPreview
 })
 
 const mapDispatchToProps = dispatch => ({

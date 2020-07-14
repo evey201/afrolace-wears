@@ -22,12 +22,29 @@ class ShopPage extends React.Component {
         const { updateCollections } = this.props;
         const collectionRef = firestore.collection('collections');
         
+        //  This uses observable pattern that firebase provides
+        // this.unSubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
+        //    const collectionsMap= convertCollectionsSnapshotToMap(snapshot);
+        //    updateCollections(collectionsMap)
+        //    this.setState({ loading:false });
+        // });
         
-        this.unSubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
-           const collectionsMap= convertCollectionsSnapshotToMap(snapshot);
-           updateCollections(collectionsMap)
-           this.setState({ loading:false });
-        });
+        // Using the fetch pattern, which is typically used when different serversother than firebase are used.
+        // fetch('https://firestore.googleapis.com/v1/projects/afrolace-db/databases/(default)/documents/collections')
+        // .then(response => response.json())
+        // .then(collections => console.log(collections));
+       
+        // Using Promises(the .get method) to fetch data, the drawback to this method is that
+        // it does not automatically reload live data unless the subscription is renewed
+        collectionRef.get().then(
+            snapshot => {
+                const collectionsMap= convertCollectionsSnapshotToMap(snapshot);
+                updateCollections(collectionsMap)
+                this.setState({ loading:false });
+            }
+        );
+
+       
         
     }
 

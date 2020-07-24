@@ -24,28 +24,29 @@ class App extends React.Component {
   
   componentDidMount() {
     const { setCurrentUser } = this.props;
-    this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+    
+    // this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
+    //   if (userAuth) {
+    //     const userRef = await createUserProfileDocument(userAuth);
 
-          userRef.onSnapshot(snapshot => {
-              setCurrentUser({
-                id: snapshot.id,
-                ...snapshot.data()
-              }); 
-            // () => {
-            //     console.log(this.state);  //an example on how to console.log setstate
-            // }
-          });
-      } 
-        setCurrentUser(userAuth);
-        //  Used the code below to add collections to the database: collectionsArray was destructured off the props
-        // addCollectionAndDocuments was gotten from the firebase.utils.js file
+    //       userRef.onSnapshot(snapshot => {
+    //           setCurrentUser({
+    //             id: snapshot.id,
+    //             ...snapshot.data()
+    //           }); 
+    //         // () => {
+    //         //     console.log(this.state);  //an example on how to console.log setstate
+    //         // }
+    //       });
+    //   } 
+    //     setCurrentUser(userAuth);
+    //     //  Used the code below to add collections to the database: collectionsArray was destructured off the props
+    //     // addCollectionAndDocuments was gotten from the firebase.utils.js file
 
-        // addCollectionAndDocuments('collections',collectionsArray.map(
-        //   ({title, items}) => ({ title, items }))
-        // );
-    });
+    //     // addCollectionAndDocuments('collections',collectionsArray.map(
+    //     //   ({title, items}) => ({ title, items }))
+    //     // );
+    // });
   }
 
    componentWillUnmount() {

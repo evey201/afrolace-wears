@@ -4,6 +4,7 @@ import 'firebase/firebase-auth';
 import 'firebase/firebase-firestore';
 
 
+
 const config = {
     apiKey: "AIzaSyAMYCPfOBeG7wfBIdt4fQojUgfXBciG9Aw",
     authDomain: "afrolace-db.firebaseapp.com",
@@ -79,6 +80,15 @@ export const convertCollectionsSnapshotToMap = collections => {
 export const auth = firebase.auth(); 
 export const firestore = firebase.firestore();
 
+// Mimicking functionality when firebase is not the backend
+export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+        const unsubscribe = auth.onAuthStateChanged(userAuth => {
+            unsubscribe();
+            resolve(userAuth);
+        }, reject);
+    });
+}
 
 // setting up google authentication utility
 export const googleProvider = new firebase.auth.GoogleAuthProvider();

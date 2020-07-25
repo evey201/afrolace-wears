@@ -11,9 +11,7 @@ import SignInAndSignUppage from './pages/sign-in-sign-up/sign-in-sign-up.compone
 import CheckoutPage from './pages/checkout/checkout.component';
 
 import Header from './components/header/header.component';
-import { auth, createUserProfileDocument  } from './firebase/firebase.utils';
 
-import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selector'
 // import { selectCollectionsForPreview } from './redux/shop/shop.selector'
 
@@ -23,8 +21,8 @@ class App extends React.Component {
   
   
   componentDidMount() {
-    const { setCurrentUser } = this.props;
-    
+    // const { setCurrentUser } = this.props;
+
     // this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
     //   if (userAuth) {
     //     const userRef = await createUserProfileDocument(userAuth);
@@ -77,11 +75,9 @@ const mapStateToProps = createStructuredSelector({
   // collectionsArray: selectCollectionsForPreview
 })
 
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-})
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+export default connect(mapStateToProps)(App);
 
 

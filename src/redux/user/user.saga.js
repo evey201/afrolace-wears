@@ -1,6 +1,6 @@
 import { takeLatest, all, call, put } from 'redux-saga/effects'
 import UserActionTypes from './user.types'
-import { auth, googleProvider, createUserProfileDocument, getCurrentUser } from '../../firebase/firebase.utils'
+import { auth, googleProvider, createUserProfileDocument, getCurrentUser, ResetPassword } from '../../firebase/firebase.utils'
 import {
     SigninSuccess,
     SigninFailed,
@@ -19,6 +19,18 @@ export function* getSnapshotFromUserAuth(userAuth, additionalData) {
 
     } catch (error) {
         yield put(SigninFailed(error))
+    }
+}
+
+export function* forgotPassword({ payload: {email} }) {
+    try {
+        const response = yield ResetPassword(email);
+        console.log(response)
+       alert('A reset email has been sent')
+       yield put(SigninSuccess(response))
+    } catch(error) {
+        yield put(SigninFailed(error))
+        console.log(error)
     }
 }
 
@@ -97,6 +109,9 @@ export function* onSignUpStart() {
 
 export function* onSignUpSuccess(){
     yield takeLatest(UserActionTypes.SIGN_UP_SUCCESS, signInAfterSignUp)
+}
+export function* onForgotPassword(){
+    yield takeLatest(UserActionTypes.FORGOT_PASSWORD_START, forgotPassword)
 } 
 
 export function* userSagas() {
@@ -106,6 +121,7 @@ export function* userSagas() {
         call(isUserAuthenticated),
         call(onSignOutStart),
         call(onSignUpStart),
-        call(onSignUpSuccess)
+        call(onSignUpSuccess),
+        call(onForgotPassword)
     ]);
 }

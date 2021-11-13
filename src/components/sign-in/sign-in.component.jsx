@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-
+import {Link} from 'react-router-dom';
 import  FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component';
 
@@ -16,7 +16,6 @@ const SignIn = ({ emailSigninStart, googleSigninStart }) => {
     const { email, password } = userCredentials;
     const handleSubmit = async event => {
         event.preventDefault();
-
         emailSigninStart(email, password);
 
     };
@@ -50,6 +49,9 @@ const SignIn = ({ emailSigninStart, googleSigninStart }) => {
                         required 
                         label='password'
                     />
+                    <div>
+                        <Link to='/forgot-password' className='forgot-password'>forgot-password?</Link>
+                    </div>
                     <div className='buttons'>
                         <CustomButton type="submit"> Sign In </CustomButton>
                         

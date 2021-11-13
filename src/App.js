@@ -9,6 +9,7 @@ import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import SignInAndSignUppage from './pages/sign-in-sign-up/sign-in-sign-up.component';
 import CheckoutPage from './pages/checkout/checkout.component';
+import ForgotPassword from './pages/sign-in-sign-up/forgot-password/forgot-password.component';
 
 import Header from './components/header/header.component';
 
@@ -62,6 +63,7 @@ class App extends React.Component {
         <Header />
         <Switch>
           <Route exact path='/' component={HomePage} />
+          <Route path='/forgot-password' component={ForgotPassword} />
           <Route path='/shop' component={ShopPage} />
           <Route exact path='/checkout' component={CheckoutPage} />
           <Route exact path='/signin' render ={() => this.props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUppage />)} />

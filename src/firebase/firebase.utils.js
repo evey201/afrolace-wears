@@ -94,5 +94,6 @@ export const getCurrentUser = () => {
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: 'select_account'});
 export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
+export const ResetPassword = (email) => auth.sendPasswordResetEmail(email, {url: 'http://localhost:3000/login'})
 
 export default firebase;

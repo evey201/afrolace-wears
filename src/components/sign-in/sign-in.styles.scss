@@ -10,5 +10,11 @@
     .buttons {
         display: flex;
         justify-content: space-between;
+        padding-Top: 20px;
+    }
+
+    .forgot-password {
+        padding-left: 290px;
+        color: red;
     }
 }

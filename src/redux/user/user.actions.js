@@ -24,6 +24,11 @@ export const emailSigninStart = emailAndPassword => ({
     payload: emailAndPassword
 });
 
+export const forgotPassword = email => ({
+    type: UserActionTypes.FORGOT_PASSWORD_START,
+    payload: email
+})
+
 export const checkUserSession = () => ({
     type: UserActionTypes.CHECK_USER_SESSION
 });
